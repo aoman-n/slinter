@@ -10,6 +10,9 @@ import (
 
 // TestAnalyzer is a test for Analyzer.
 func TestAnalyzer(t *testing.T) {
+	analyzer := slinter.Analyzer
+	analyzer.Flags.Set("maxLines", "7")
+
 	testdata := testutil.WithModules(t, analysistest.TestData(), nil)
 	analysistest.Run(t, testdata, slinter.Analyzer, "a")
 }

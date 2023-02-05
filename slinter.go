@@ -22,15 +22,20 @@ var Analyzer = &analysis.Analyzer{
 	},
 }
 
+var (
+	maxLines int
+	maxArgs  int
+)
+
 const (
-	defaultMaxLines = 6
+	defaultMaxLines = 150
 	defaultMaxArgs  = 4
 )
 
-var (
-	maxLines = defaultMaxLines
-	maxArgs  = defaultMaxArgs
-)
+func init() {
+	Analyzer.Flags.IntVar(&maxLines, "maxLines", defaultMaxLines, "max lines of function")
+	Analyzer.Flags.IntVar(&maxArgs, "maxArgs", defaultMaxArgs, "max args of function")
+}
 
 func createOverLinesMessage(funcName string, lines int) string {
 	return fmt.Sprintf(
